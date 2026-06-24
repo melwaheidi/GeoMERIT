@@ -107,8 +107,8 @@ v2={"Groundwater":0.933,"Void_Detection":0.900,"Archaeology":0.933}
 scn=["Groundwater","Void_Detection","Archaeology"]; xlab=[titles[s] for s in scn]
 xi=np.arange(3); bw=0.36
 fig,ax=plt.subplots(figsize=(6.6,4.0))
-b1=ax.bar(xi-bw/2,[v1[s] for s in scn],bw,label="Target-blind (original)",color=GREY,edgecolor="#22333b")
-b2=ax.bar(xi+bw/2,[v2[s] for s in scn],bw,label="Target-aware (revised)",color=TEAL,edgecolor="#22333b")
+b1=ax.bar(xi-bw/2,[v1[s] for s in scn],bw,label="Target-blind",color=GREY,edgecolor="#22333b")
+b2=ax.bar(xi+bw/2,[v2[s] for s in scn],bw,label="Target-aware",color=TEAL,edgecolor="#22333b")
 rho_crit=0.683
 ax.axhline(rho_crit,ls="--",color=AMBER,lw=1.3)
 ax.text(2.45,rho_crit+0.02,"p = 0.05 (n = 9)",color=AMBER,fontsize=8,ha="right")
