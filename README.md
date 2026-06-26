@@ -83,17 +83,16 @@ See `USAGE.md` for the full list of input fields and accepted values.
 The expert rankings and the derived case-study encodings are released here as
 research artifacts of this study. The underlying field datasets that motivated
 the three case-study sites are not redistributed and remain credited to their
-original sources (Maeshi et al.; Qaysi et al., 2022; Badhrais thesis), as cited
+original sources (Maeshi et al. 2026; Alharbi et al., 2023; Badhrais, 2025), as cited
 in the manuscript.
 
 ## Citation
 
 Please cite the manuscript above and the archived release. After minting a
-Zenodo DOI (link the GitHub repository to Zenodo and cut a release), cite the
-concept DOI:
+Zenodo DOI, cite the concept DOI:https://doi.org/10.5281/zenodo.20932723. 
 
 > Elwaheidi, M. M. (2026). GeoMERIT (Version 1.0.0) [Software]. Zenodo.
-> https://doi.org/10.5281/zenodo.XXXXXXX
+> https://doi.org/10.5281/zenodo.20932723.
 
 ## License
 
