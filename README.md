@@ -1,49 +1,100 @@
-# Supplementary code and data
+# GeoMERIT
 
-Reproduces every reported ranking, statistic, and figure in the manuscript
-"An Open-Source Multi-Criteria Decision Framework for Geophysical Method
-Selection: Target-Specific Physical-Property Contrast and Validation Against
-Expert Consensus".
+**Geophysical Method Evaluation and Ranking by Investigation Target**
+
+Reproducibility package for the manuscript:
+
+> Elwaheidi, M. M. *GeoMERIT: an open-source tool for geophysical method selection
+> using target-specific physical-property contrast, validated against expert
+> consensus and field deployments.* Submitted to *Applied Computing and Geosciences*.
+
+Author: Mahmoud M. Elwaheidi, Department of Geology and Geophysics, College of
+Science, King Saud University (ORCID: 0000-0003-4863-3184).
+
+GeoMERIT is an open-source tool that ranks nine common near-surface geophysical
+methods (ERT, IP, SP, GPR, TEM, seismic refraction, magnetometry, gravity, and
+radiometric) for a stated investigation scenario. Methods are scored against
+four weighted criteria — physical-property contrast (0.40), data quality (0.30),
+cost (0.20), and time/effort (0.10) — refined by site-specific adjustment
+factors for target depth, ambient noise, and ground conductivity. The element
+that governs the ranking is an explicit method-by-target physical-property
+contrast matrix, so the score a method receives is conditioned on what the
+target is rather than on a generic measure of resolution.
 
 ## Requirements
+
+Python 3.8+ with the packages in `requirements.txt`:
+
 ```
-pip install -r requirements.txt      # numpy, pandas, scipy, matplotlib
-```
-
-## Files and what they reproduce
-
-Models
-- `geophysical_method_selector_v2.py`        — target-aware framework (contrast matrix + corrected depth/conductivity factors).
-- `geophysical_method_selector_v1_target_blind.py` — original target-blind variant (contrast criterion = generic resolution); source of the comparison column.
-
-Statistics
-- `validation_9methods_fixed.py`             — Spearman rho (Fisher-z CI), Kendall tau, Kendall's W.
-
-Drivers (each maps to a reported result)
-- `run_v2.py`             -> Table 6 (framework vs expert ranks) and Table 7 (target-aware metrics); writes `framework_rankings_v2.csv`, `validation_results_v2.csv`.
-- `robustness_v2.py`      -> Table 8 and Figure 4 (robustness to the qualitative->numeric encoding).
-- `matrix_sensitivity_v2.py` -> Section 4.3, matrix-perturbation result (+/-0.1 on every contrast value, 1000 draws).
-- `figures.py`            -> Figures 1-5.
-
-Data
-- `actual_expert_rankings_9methods.csv`      — per-expert rankings (E1-E5 x 3 scenarios); raw validation data.
-- `framework_rankings_v2.csv`                — target-aware framework rankings (Table 6).
-- `validation_results_v2.csv`                — target-aware validation metrics (Table 7).
-- `framework_rankings_target_blind.csv`      — target-blind rankings; validating these reproduces the Table 7 target-blind column and the grey bars of Figure 5 (rho = 0.033, 0.450, 0.967).
-
-## Reproduce
-```
-python run_v2.py              # target-aware rankings + validation
-python robustness_v2.py       # encoding robustness
-python matrix_sensitivity_v2.py
-python figures.py             # writes figs/
-
-# target-blind comparison column:
-python -c "from validation_9methods_fixed import validate_framework; \
-print(validate_framework('actual_expert_rankings_9methods.csv','framework_rankings_target_blind.csv')[['Scenario','Spearman_rho','Spearman_p']])"
+pip install -r requirements.txt
 ```
 
-## Scenario encodings (Table 5)
-Groundwater: target_depth=50 m, conductivity=100 mS/m, noise=20%, budget=5000, time=3 d, required_resolution=0.7
-Void detection: 15 m, 20 mS/m, 60%, 10000, 6 d, 0.9
-Archaeology: 2.5 m, 50 mS/m, 20%, 2500, 1.5 d, 0.9
+## Contents
+
+| File | Description |
+|------|-------------|
+| `geophysical_method_selector_v2.py` | Core tool: the `GeophysicalMethodSelectorV2` class (method table, contrast matrix, weights, scoring). |
+| `actual_expert_rankings_9methods.csv` | Expert rankings (5 experts x 9 methods x 3 scenarios) used for validation. |
+| `GeoMethod_CaseStudy_Intake_2.xlsx` | Intake workbook with the three field-site case-study encodings. |
+| `reproduce_validation.py` | Regenerates the expert-consensus metrics (Spearman rho, Kendall tau, inter-expert W). |
+| `case_study_runner.py` | Runs GeoMERIT on the three documented field sites and writes `case_study_results.csv`. |
+| `make_usage_figure.py` | Reproduces the worked usage example shown in Figure 3. |
+| `case_study_results.csv` | Output: field-site rankings and deployed-vs-recommended comparison. |
+| `geomerit_usage_figure.png` | Output: Figure 3 (example use of GeoMERIT). |
+| `case_study_figure.png` | Output: Figure 7 (field-site rankings and depth crossover). |
+| `LICENSE` | MIT License. |
+
+## Reproducing the results
+
+```bash
+python reproduce_validation.py     # expert-consensus metrics (Table of validation metrics)
+python case_study_runner.py        # field-site validation (Section 5.4 / Figure 7)
+python make_usage_figure.py        # worked example (Figure 3)
+```
+
+Expected output of `reproduce_validation.py`:
+
+```
+Groundwater       rho=0.933  tau=0.833   top method ERT
+Void_Detection    rho=0.900  tau=0.778   top method GPR
+Archaeology       rho=0.933  tau=0.833   top method GPR
+```
+
+The scoring is deterministic and contains no fitted parameters, so these values
+reproduce exactly. The Monte Carlo robustness analysis (Figure 5) uses a fixed
+random seed; set the same seed to reproduce the reported distribution.
+
+## Using GeoMERIT on a new scenario
+
+```python
+from geophysical_method_selector_v2 import GeophysicalMethodSelectorV2
+selector = GeophysicalMethodSelectorV2()
+scenario = dict(target='groundwater', target_depth=50, conductivity=100,
+                noise_level=20, budget=5000, time_constraint=3,
+                required_resolution=0.7)
+for rank, (method, score) in enumerate(selector.rank_methods(scenario), 1):
+    print(rank, method, round(score, 1))
+```
+
+See `USAGE.md` for the full list of input fields and accepted values.
+
+## Data provenance
+
+The expert rankings and the derived case-study encodings are released here as
+research artifacts of this study. The underlying field datasets that motivated
+the three case-study sites are not redistributed and remain credited to their
+original sources (Maeshi et al.; Qaysi et al., 2022; Badhrais thesis), as cited
+in the manuscript.
+
+## Citation
+
+Please cite the manuscript above and the archived release. After minting a
+Zenodo DOI (link the GitHub repository to Zenodo and cut a release), cite the
+concept DOI:
+
+> Elwaheidi, M. M. (2026). GeoMERIT (Version 1.0.0) [Software]. Zenodo.
+> https://doi.org/10.5281/zenodo.XXXXXXX
+
+## License
+
+MIT License — see `LICENSE`.
