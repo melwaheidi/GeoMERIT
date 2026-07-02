@@ -1,0 +1,5 @@
+analysis,metric,mean_pct,p5_pct,p50_pct,p95_pct,n
+unconstrained,top1,37.6,9.1,40.9,50.0,5000
+unconstrained,top3,66.4,40.9,72.7,81.8,5000
+order_preserving,top1,47.1,45.5,45.5,54.5,5000
+order_preserving,top3,81.3,77.3,81.8,81.8,5000
