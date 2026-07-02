@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+title: >-
+  GeoMERIT: an open-source tool for reproducible
+  target-specific selection of near-surface geophysical
+  methods
+message: >-
+  If you use this software, please cite both the software
+  (this file) and the accompanying paper listed under
+  preferred-citation.
+type: software
+authors:
+  - given-names: Mahmoud M.
+    family-names: Elwaheidi
+    email: melwaheidi@ksu.edu.sa
+    affiliation: >-
+      Department of Geology and Geophysics, College of
+      Science, King Saud University, Riyadh, Saudi Arabia
+    orcid: 'https://orcid.org/0000-0003-4863-3184'
+repository-code: 'https://github.com/melwaheidi/GeoMERIT'
+abstract: >-
+  GeoMERIT (Geophysical Method Evaluation and Ranking by
+  Investigation Target) is an open-source, knowledge-based
+  tool that ranks nine common near-surface geophysical
+  methods for a stated investigation target. It uses a
+  weighted sum model over an explicit, literature-derived
+  method-by-target physical-property-contrast matrix, so
+  that recommendations are conditioned on the physics of the
+  specific target and every element of a recommendation is
+  inspectable and reproducible.
+keywords:
+  - geophysical method selection
+  - multi-criteria decision analysis
+  - physical-property contrast
+  - near-surface geophysics
+  - open-source software
+  - reproducible research
+license: MIT
+version: 1.0.0
+date-released: '2026-07-02'
+preferred-citation:
+  type: article
+  title: >-
+    GeoMERIT: an open-source tool for reproducible
+    target-specific selection of near-surface geophysical
+    methods
+  authors:
+    - given-names: Mahmoud M.
+      family-names: Elwaheidi
+      orcid: 'https://orcid.org/0000-0003-4863-3184'
+  journal: Applied Computing and Geosciences
+  year: 2026

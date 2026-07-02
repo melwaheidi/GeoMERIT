@@ -1,0 +1,9 @@
+criterion,entropy_e,diversification_d,entropy_weight,fixed_weight
+physical_contrast,0.9485,0.0515,0.194,0.4
+data_quality,0.9567,0.0433,0.163,0.3
+cost,0.919,0.081,0.305,0.2
+effort,0.9104,0.0896,0.338,0.1
+
+agreement,top1_pct,top3_pct,,
+fixed,45.5,81.8,,
+entropy,36.4,54.5,,

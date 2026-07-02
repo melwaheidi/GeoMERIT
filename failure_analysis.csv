@@ -1,0 +1,13 @@
+case_id,target_class,deployed,top1,rank_of_deployed,mc_top3_retention,category
+BM-06,groundwater,TEM,ERT,2,1.0,operational
+BM-07,groundwater,Induced_Polarization,ERT,3,0.757,matrix
+BM-08,groundwater,Self_Potential,ERT,4,0.415,matrix
+BM-09,groundwater,Seismic_Refraction,ERT,4,0.005,scope
+BM-10,void,Gravity,GPR,3,1.0,matrix
+BM-11,void,Gravity,ERT,3,1.0,matrix
+BM-12,void,Gravity,GPR,3,0.966,matrix
+BM-15,void,Seismic_Refraction,GPR,4,0.0,scope
+BM-17,archaeology,Magnetometry,GPR,2,1.0,operational
+BM-18,archaeology,Magnetometry,GPR,2,1.0,operational
+BM-21,archaeology,Radiometric,Magnetometry,6,0.0,scope
+BM-22,archaeology,ERT,GPR,3,1.0,matrix

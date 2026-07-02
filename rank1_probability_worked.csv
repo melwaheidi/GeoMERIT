@@ -1,0 +1,10 @@
+scenario,method,rank1_prob,mean_score,p5_score,p95_score
+Worked example (groundwater),ERT,1.0,78.47,72.84,83.0
+Worked example (groundwater),Induced_Polarization,0.0,59.28,52.55,64.96
+Worked example (groundwater),Self_Potential,0.0,49.24,38.91,58.29
+Worked example (groundwater),GPR,0.0,27.24,22.69,30.82
+Worked example (groundwater),TEM,0.0,62.88,58.45,68.01
+Worked example (groundwater),Seismic_Refraction,0.0,49.85,47.74,53.35
+Worked example (groundwater),Magnetometry,0.0,29.56,26.06,32.27
+Worked example (groundwater),Gravity,0.0,16.94,12.19,21.8
+Worked example (groundwater),Radiometric,0.0,14.36,8.32,18.92
